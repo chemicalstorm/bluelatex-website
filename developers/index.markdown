@@ -93,10 +93,15 @@ Or whatever path is returned by `which jsvc`
 
 ### Unable to connect to the server 
 
-If the `blueStart` command was correctly executed but you cannot connect to the server. Have a look at content of file `/tmp/bluelatex.err`. If you see this line in it:
+If the `blueStart` command was correctly executed but you cannot connect to the server. Have a look at content of file `/tmp/bluelatex.err`. If you see something like the following lines in it:
 
 ```
 No config.properties found.
+```
+or
+```
+ERROR: Unable to create cache directory: ./felix-cache
+ERROR: Error creating bundle cache. (java.lang.RuntimeException: Unable to create cache directory.)
 ```
 
 It means that you have a version of jsvc that requires setting explicitly the working directory.
