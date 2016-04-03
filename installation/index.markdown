@@ -38,6 +38,37 @@ EOF
 # apt-get install bluelatex
 ```
 
+Installation from CentOS Packages
+---------------------------------
+
+We currently provide packages for CentOS 7 and Fedora 20, 21 and 22.
+
+This section will focus on CentOS 7, but it is possible that the procedure also
+works on Fedora systems.
+
+CentOS does not provide couchdb RPM anymore. Before installing the \BlueLaTeX
+package, you will have to compile and package the couchdb server. The following
+procedure is an [extract](https://github.com/wendall911/couchdb-rpm), and has
+to be executed as a regular user (excepted yum command to install dependencies/built package):
+
+```shell
+$ mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+$ echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
+$ cd rpmbuild/SOURCES
+$ git clone https://github.com/wendall911/couchdb-rpm.git .
+$ spectool -g -R couchdb.spec
+$ rpmbuild -bs couchdb.spec
+$ sudo yum-builddep ~/rpmbuild/SRPMS/couchdb-1.6.1-1.el7.centos.src.rpm
+$ rpmbuild --rebuild rpmbuild/SRPMS/couchdb-1.6.1-1.el7.centos.src.rpm
+$ sudo yum install rpmbuild/RPMS/x86_64/couchdb-1.6.1-1.el7.centos.x86_64.rpm
+```
+
+Then it is possible to install the \BlueLaTeX package:
+
+```shell
+$ sudo yum install http://hosting.ptitoliv.net/bluelatex/bluelatex-1.0.6-1.el7.centos.x86_64.rpm
+```
+
 Installation from Binary Distribution Package
 ---------------------------------------------
 
